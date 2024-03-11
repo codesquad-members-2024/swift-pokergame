@@ -7,10 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-    
-    
-    
+class CardBoardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,24 +19,36 @@ class ViewController: UIViewController {
     }
 }
 
-private extension ViewController {
+private extension CardBoardViewController {
     func setupView() {
         
-        let availableWidth = view.bounds.width - 20 * 2 - 60 // 좌우 여백 20, 카드 사이 여백 10 * 6
-        let cardWidth = availableWidth / CGFloat(7.0) // 좌우여백, 카드사이 여백 10*6뺀 나머지 가로길이에 7등분
-        let cardHeight = cardWidth * CGFloat(1.27)
+        let totalCards = 7
+        let cardAspectRatio: CGFloat = 1.27
+        let stackViewSpacing: CGFloat = 10.0
         
-        for i in 0..<7 {
-            let cardX = 20 + CGFloat(i) * (cardWidth + 10) // 각 카드의 x 좌표
-            createCardImageView(x: cardX, y: 100, width: cardWidth, height: cardHeight)
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.alignment = .fill
+        stackView.spacing = stackViewSpacing
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        for _ in 0..<totalCards {
+            let cardImageView = UIImageView()
+            cardImageView.image = UIImage(named: "card-back")
+            cardImageView.contentMode = .scaleAspectFit
+            cardImageView.clipsToBounds = true
+            stackView.addArrangedSubview(cardImageView)
         }
-    }
-    
-    private func createCardImageView(x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat) {
-        let cardImageView = UIImageView(frame: CGRect(x: x, y: y, width: width, height: height))
-        cardImageView.image = UIImage(named: "card-back")
-        cardImageView.contentMode = .scaleAspectFit
-        view.addSubview(cardImageView)
+        
+        view.addSubview(stackView)
+        
+        NSLayoutConstraint.activate([
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20), // 좌측 여백
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20), // 우측 여백
+            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100), // 상단 여백
+            stackView.heightAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: cardAspectRatio / CGFloat(totalCards))
+        ])
     }
 }
 
