@@ -18,6 +18,7 @@
 		D6F97DD12BA00E3600745D8D /* Suit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F97DD02BA00E3600745D8D /* Suit.swift */; };
 		D6F97DD32BA0131500745D8D /* Rank.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F97DD22BA0131500745D8D /* Rank.swift */; };
 		D6F97DD52BA014E600745D8D /* PokerCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F97DD42BA014E600745D8D /* PokerCard.swift */; };
+		D6F97DD82BA0991100745D8D /* CardDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F97DD72BA0991100745D8D /* CardDeck.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		D6F97DD02BA00E3600745D8D /* Suit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Suit.swift; sourceTree = "<group>"; };
 		D6F97DD22BA0131500745D8D /* Rank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rank.swift; sourceTree = "<group>"; };
 		D6F97DD42BA014E600745D8D /* PokerCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerCard.swift; sourceTree = "<group>"; };
+		D6F97DD72BA0991100745D8D /* CardDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDeck.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				D6F97DA02B9E961500745D8D /* AppDelegate.swift */,
 				D6F97DA22B9E961500745D8D /* SceneDelegate.swift */,
 				D6F97DA42B9E961500745D8D /* CardBoardViewController.swift */,
+				D6F97DD72BA0991100745D8D /* CardDeck.swift */,
 				D6F97DD62BA0161600745D8D /* CardModels */,
 				D6F97DA92B9E961600745D8D /* Assets.xcassets */,
 				D6F97DAB2B9E961600745D8D /* LaunchScreen.storyboard */,
@@ -275,6 +278,7 @@
 				D6F97DA12B9E961500745D8D /* AppDelegate.swift in Sources */,
 				D6F97DD12BA00E3600745D8D /* Suit.swift in Sources */,
 				D6F97DD52BA014E600745D8D /* PokerCard.swift in Sources */,
+				D6F97DD82BA0991100745D8D /* CardDeck.swift in Sources */,
 				D6F97DD32BA0131500745D8D /* Rank.swift in Sources */,
 				D6F97DA32B9E961500745D8D /* SceneDelegate.swift in Sources */,
 			);

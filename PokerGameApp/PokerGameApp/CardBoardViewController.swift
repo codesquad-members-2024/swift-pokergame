@@ -18,6 +18,21 @@ class CardBoardViewController: UIViewController {
         
         print(sample1.describe())
         print(sample2.describe())
+        debugPrint(sample1.describe())
+        debugPrint(sample2)
+        
+        print("\n인스턴스를 생성하면 카드를 준비할게요!")
+        var cardDeck = CardDeck()
+        print("총 \(cardDeck.count)장의 카드가 있습니다.")
+        
+        cardDeck.shuffle()
+        print("\n셔플했어요!")
+        
+        print("\n\(cardDeck.removeOne()!.describe())를 뽑았습니다.")
+        print("총 \(cardDeck.count)장의 카드가 있습니다.")
+              
+        print("\n\(cardDeck.removeOne()!.describe())를 뽑았습니다.")
+        print("총 \(cardDeck.count)장의 카드가 있습니다.")
     }
 }
 
