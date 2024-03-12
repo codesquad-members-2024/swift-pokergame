@@ -9,12 +9,15 @@
 /* Begin PBXBuildFile section */
 		D6F97DA12B9E961500745D8D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F97DA02B9E961500745D8D /* AppDelegate.swift */; };
 		D6F97DA32B9E961500745D8D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F97DA22B9E961500745D8D /* SceneDelegate.swift */; };
-		D6F97DA52B9E961500745D8D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F97DA42B9E961500745D8D /* ViewController.swift */; };
+		D6F97DA52B9E961500745D8D /* CardBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F97DA42B9E961500745D8D /* CardBoardViewController.swift */; };
 		D6F97DAA2B9E961600745D8D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6F97DA92B9E961600745D8D /* Assets.xcassets */; };
 		D6F97DAD2B9E961600745D8D /* Base in Resources */ = {isa = PBXBuildFile; fileRef = D6F97DAC2B9E961600745D8D /* Base */; };
 		D6F97DB82B9E961600745D8D /* PokerGameAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F97DB72B9E961600745D8D /* PokerGameAppTests.swift */; };
 		D6F97DC22B9E961600745D8D /* PokerGameAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F97DC12B9E961600745D8D /* PokerGameAppUITests.swift */; };
 		D6F97DC42B9E961600745D8D /* PokerGameAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F97DC32B9E961600745D8D /* PokerGameAppUITestsLaunchTests.swift */; };
+		D6F97DD12BA00E3600745D8D /* Suit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F97DD02BA00E3600745D8D /* Suit.swift */; };
+		D6F97DD32BA0131500745D8D /* Rank.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F97DD22BA0131500745D8D /* Rank.swift */; };
+		D6F97DD52BA014E600745D8D /* PokerCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F97DD42BA014E600745D8D /* PokerCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +41,7 @@
 		D6F97D9D2B9E961500745D8D /* PokerGameApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokerGameApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6F97DA02B9E961500745D8D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D6F97DA22B9E961500745D8D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D6F97DA42B9E961500745D8D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D6F97DA42B9E961500745D8D /* CardBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBoardViewController.swift; sourceTree = "<group>"; };
 		D6F97DA92B9E961600745D8D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D6F97DAC2B9E961600745D8D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D6F97DAE2B9E961600745D8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -47,6 +50,9 @@
 		D6F97DBD2B9E961600745D8D /* PokerGameAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PokerGameAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6F97DC12B9E961600745D8D /* PokerGameAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerGameAppUITests.swift; sourceTree = "<group>"; };
 		D6F97DC32B9E961600745D8D /* PokerGameAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerGameAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D6F97DD02BA00E3600745D8D /* Suit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Suit.swift; sourceTree = "<group>"; };
+		D6F97DD22BA0131500745D8D /* Rank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rank.swift; sourceTree = "<group>"; };
+		D6F97DD42BA014E600745D8D /* PokerCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,7 +105,8 @@
 			children = (
 				D6F97DA02B9E961500745D8D /* AppDelegate.swift */,
 				D6F97DA22B9E961500745D8D /* SceneDelegate.swift */,
-				D6F97DA42B9E961500745D8D /* ViewController.swift */,
+				D6F97DA42B9E961500745D8D /* CardBoardViewController.swift */,
+				D6F97DD62BA0161600745D8D /* CardModels */,
 				D6F97DA92B9E961600745D8D /* Assets.xcassets */,
 				D6F97DAB2B9E961600745D8D /* LaunchScreen.storyboard */,
 				D6F97DAE2B9E961600745D8D /* Info.plist */,
@@ -122,6 +129,16 @@
 				D6F97DC32B9E961600745D8D /* PokerGameAppUITestsLaunchTests.swift */,
 			);
 			path = PokerGameAppUITests;
+			sourceTree = "<group>";
+		};
+		D6F97DD62BA0161600745D8D /* CardModels */ = {
+			isa = PBXGroup;
+			children = (
+				D6F97DD02BA00E3600745D8D /* Suit.swift */,
+				D6F97DD22BA0131500745D8D /* Rank.swift */,
+				D6F97DD42BA014E600745D8D /* PokerCard.swift */,
+			);
+			path = CardModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,8 +271,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6F97DA52B9E961500745D8D /* ViewController.swift in Sources */,
+				D6F97DA52B9E961500745D8D /* CardBoardViewController.swift in Sources */,
 				D6F97DA12B9E961500745D8D /* AppDelegate.swift in Sources */,
+				D6F97DD12BA00E3600745D8D /* Suit.swift in Sources */,
+				D6F97DD52BA014E600745D8D /* PokerCard.swift in Sources */,
+				D6F97DD32BA0131500745D8D /* Rank.swift in Sources */,
 				D6F97DA32B9E961500745D8D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
