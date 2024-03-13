@@ -11,37 +11,19 @@ class CardBoardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if let patternImage = UIImage(named: "bg_1pattern") {
+            view.backgroundColor = UIColor(patternImage: patternImage)
+        } else {
+            view.backgroundColor = .brown
+        }
+        
         setupView()
-        
-        let sample1 = PokerCard(suit: .hearts, rank: .queen)
-        let sample2 = PokerCard(suit: .spades, rank: .seven)
-        
-        print(sample1.describe())
-        print(sample2.describe())
-        debugPrint(sample1.describe())
-        debugPrint(sample2)
-        
-        print("\n인스턴스를 생성하면 카드를 준비할게요!")
-        var cardDeck = CardDeck()
-        print("총 \(cardDeck.count)장의 카드가 있습니다.")
-        
-        cardDeck.shuffle()
-        print("\n셔플했어요!")
-        
-        print("\n\(cardDeck.removeOne()!.describe())를 뽑았습니다.")
-        print("총 \(cardDeck.count)장의 카드가 있습니다.")
-              
-        print("\n\(cardDeck.removeOne()!.describe())를 뽑았습니다.")
-        print("총 \(cardDeck.count)장의 카드가 있습니다.")
+
     }
 }
 
 private extension CardBoardViewController {
     func setupView() {
-        guard let patternImage = UIImage(named: "bg_pattern") else {
-            return
-        }
-        view.backgroundColor = UIColor(patternImage: patternImage)
         
         let totalCards = 7
         let cardAspectRatio: CGFloat = 1.27
