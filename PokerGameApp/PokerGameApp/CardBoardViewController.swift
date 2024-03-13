@@ -11,7 +11,7 @@ class CardBoardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let patternImage = UIImage(named: "bg_1pattern") {
+        if let patternImage = UIImage(named: "bg_pattern") {
             view.backgroundColor = UIColor(patternImage: patternImage)
         } else {
             view.backgroundColor = .brown
