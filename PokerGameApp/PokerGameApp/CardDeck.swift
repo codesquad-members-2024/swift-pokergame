@@ -10,16 +10,11 @@ import Foundation
 struct CardDeck {
     private var cards: [PokerCard] = []
     
-    var count: Int {
-        return cards.count
-    }
-    
-    // 인스턴스 생성할 때 카드준비한다.
+    /// 인스턴스 생성할 때 카드준비한다.
     init() {
         reset()
     }
     
-    // 값 타입인 구조체에서 메소드 내에서 프로퍼티를 수정하기 위해 mutating키워드 사용
     mutating func reset() {
         cards.removeAll()
         
@@ -31,17 +26,26 @@ struct CardDeck {
         }
     }
     
-//    for i from n−1 down to 1 do
-//    j ← random integer such that 0 ≤ j ≤ i
-//    exchange a[j] and a[i]
-    mutating func shuffle() {
+    /**
+     shuffle 처리하기 위해 Fisher-Yates알고리즘을 이용한 배열 섞기
+     > 배열의 마지막 요소와 선택된 무작위 요소를 교환한다. 이 과정을 배열 전체에 대해 반복하여 배열을 섞는다.
+     - 작동 방식:
+     1. 인덱스 i를 배열의 마지막 인덱스(n-1)로 설정한다.
+     2. i가 1보다 크거나 같은 동안 다음을 반복한다:
+        1. 0부터 i 사이에서 무작위 인덱스 j를 선택한다.
+        2. 배열의 i번째 요소와 j번째 요소를 교환한다.
+        3. i를 1 감소한다.
+     - 왜 이 방식을 선택? Fisher-Yates 알고리즘은 단순하면서도 효율적인 셔플 방식을 제공한다.
+     - 어디서 알게 되었나? [Fisher-Yates위키백과](https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle)
+     */
+    mutating func shuffle() -> [PokerCard] {
         for i in stride(from: cards.count - 1, to: 1, by: -1) {
             let j = Int.random(in: 0...i)
             cards.swapAt(i, j)
         }
+        return cards
     }
     
-    // 제거할 카드가 없는 경우에 있기 때문에 리턴을 옵셔널 값으로 함.
     mutating func removeOne() -> PokerCard? {
         guard !cards.isEmpty else { return nil }
         return cards.removeFirst()
