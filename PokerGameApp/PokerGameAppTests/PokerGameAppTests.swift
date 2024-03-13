@@ -9,28 +9,29 @@ import XCTest
 @testable import PokerGameApp
 
 final class PokerGameAppTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    
+    func test_CardDeckInitialization() {
+        let deck = CardDeck()
+        
+        XCTAssertEqual(deck.cards.count, 52, "초기화된 카드덱은 52장이 되어야 한다.")
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    func test_Shuffle() {
+        var deck = CardDeck()
+        
+        let originalDeck = deck.cards
+        let shuffledDeck = deck.shuffle()
+        
+        XCTAssertNotEqual(originalDeck, shuffledDeck, "원본과 셔플된 덱이 달라야 한다.")
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    
+    func test_PokerCardDescription() {
+        let card = PokerCard(suit: .hearts, rank: .queen)
+        
+        let expectedDescription = "\u{2665}Q"
+        
+        XCTAssertEqual(card.description, expectedDescription, "문자열 일치해야 한다.")
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
 }
+
+
