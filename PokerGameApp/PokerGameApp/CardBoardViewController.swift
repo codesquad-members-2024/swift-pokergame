@@ -18,7 +18,11 @@ class CardBoardViewController: UIViewController {
         }
         
         setupView()
-
+        
+        var pokerGame = PokerGame(gameType: .sevenCard, playerCount: 3)
+        pokerGame.startGame()
+        pokerGame.printPlayerAndDealerCards()
+        
     }
 }
 
@@ -38,7 +42,13 @@ private extension CardBoardViewController {
         
         for _ in 0..<totalCards {
             let cardImageView = UIImageView()
-            cardImageView.image = UIImage(named: "card-back")
+            
+            if let backOfCardImage = UIImage(named: "card-back") {
+                cardImageView.image = backOfCardImage
+            } else {
+                cardImageView.image = UIImage(systemName: "menucard.fill")!.withTintColor(.white, renderingMode: .alwaysOriginal)
+            }
+            
             cardImageView.contentMode = .scaleAspectFit
             cardImageView.clipsToBounds = true
             stackView.addArrangedSubview(cardImageView)

@@ -10,11 +10,6 @@ import Foundation
 struct CardDeck: Equatable {
     var cards: [PokerCard] = []
     
-    /// 인스턴스 생성할 때 카드준비한다.
-    init() {
-        reset()
-    }
-    
     mutating func reset() {
         cards.removeAll()
         
