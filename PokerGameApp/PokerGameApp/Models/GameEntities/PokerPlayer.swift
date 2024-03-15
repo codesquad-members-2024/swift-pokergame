@@ -7,15 +7,19 @@
 
 import Foundation
 
-class PokerPlayer {
+class PokerPlayer: CardHolder {
     var name: String
-    var playerCards: [PokerCard] = []
+    var cards: [PokerCard] = []
     
     init(name: String) {
         self.name = name
     }
     
     func receive(cards: [PokerCard]) {
-        playerCards.append(contentsOf: cards)
+        self.cards.append(contentsOf: cards)
+    }
+    
+    func cardsDescriptions() -> [String] {
+        return cards.map { $0.description }
     }
 }

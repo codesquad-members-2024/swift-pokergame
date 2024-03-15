@@ -7,19 +7,25 @@
 
 import Foundation
 
-enum GameType {
-    case sevenCard
-    case fiveCard
+enum GameType: Int {
+    case sevenCard = 7
+    case fiveCard = 5
+}
+
+enum PlayerType: Int {
+    case two = 2
+    case three = 3
+    case four = 4
 }
 
 class PokerGame {
-    var dealer = PokerDealer()
-    var players: [PokerPlayer] = []
+    private var dealer = PokerDealer()
+    private var players: [PokerPlayer] = []
     private var gameType: GameType
     
-    init(gameType: GameType, playerCount: Int) {
+    init(gameType: GameType, playerCount: PlayerType) {
         self.gameType = gameType
-        let playerNames = makeRandomName(count: playerCount)
+        let playerNames = makeRandomName(count: playerCount.rawValue)
         self.players = playerNames.map { PokerPlayer(name: $0) }
     }
     
@@ -33,7 +39,7 @@ class PokerGame {
         for _ in 0..<count {
             if let randomName = availableNames.randomElement() {
                 selectedNames.append(randomName)
-                availableNames.removeAll { $0 == randomName } 
+                availableNames.removeAll { $0 == randomName }
             }
         }
         
@@ -41,23 +47,32 @@ class PokerGame {
     }
     
     func startGame() {
-        let cardCount = (gameType == .sevenCard) ? 7 : 5
+        let cardCount = gameType.rawValue
         
         dealer.shuffleDeck()
         
+        distributeCards(to: dealer, cardCount: cardCount)
         for player in players {
-            let cards = dealer.dealCards(count: cardCount) ?? []
-            player.receive(cards: cards)
+            distributeCards(to: player, cardCount: cardCount)
         }
-        
-        let cards = dealer.dealCards(count: cardCount) ?? []
-        dealer.dealerCards = cards
     }
     
-    func printPlayerAndDealerCards() {
-        for player in players {
-            print("\(player.name)의 카드: \(player.playerCards.map { $0.description }.joined(separator: ", "))")
-        }
-        print("딜러의 카드: \(dealer.dealerCards.map { $0.description }.joined(separator: ", "))")
+    func getDealerInfo() -> (String, [String]) {
+        return (dealer.name, dealer.cardsDescriptions())
+    }
+    
+    func getPlayersInfo() -> ([String], [[String]]) {
+        return (players.map { $0.name }, players.map { $0.cardsDescriptions() })
+    }
+    
+    private func distributeCards(to cardHolder: CardHolder, cardCount: Int) {
+        let cards = dealer.dealCards(count: cardCount) ?? []
+        cardHolder.receive(cards: cards)
+    }
+    
+    func uniquePlayerNamesCount() -> Int {
+        let names = players.map { $0.name }
+        let uniqueNames = Set(names)
+        return uniqueNames.count
     }
 }
