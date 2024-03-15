@@ -514,3 +514,137 @@ shuffle, removeOne, reset 기능은 배열을 이용해서 구현하도록 한�
 
 </div>
 </details>
+
+<details>
+<summary>포커게임 화면만들기</summary>
+
+## 🎯주요 작업
+
+- [x]  PokerCard객체와 이미지 파일명을 매치하는 방법 모색하기
+- [x]  shake 이벤트를 발생하면 랜덤카드를 다시 섞고 다시 동작하도록 구현
+- [x]  카드 이미지를 적용한 UI를 완성한다.
+
+## 📚학습 키워드
+
+### **Segment Control**
+
+여러 세그먼트로 구성된 수평 컨트롤러
+
+```swift
+func setupSegmentControl() {
+        let gameTypeSegmentedControl = UISegmentedControl(items: ["7 Cards", "5 Cards"])
+        let playerCountSegmentedControl = UISegmentedControl(items: ["2명", "3명", "4명"])
+        
+        gameTypeSegmentedControl.selectedSegmentIndex = 0
+        playerCountSegmentedControl.selectedSegmentIndex = 0
+        
+        gameTypeSegmentedControl.addTarget(self, action: #selector(gameTypeChanged(_:)), for: .valueChanged)
+        playerCountSegmentedControl.addTarget(self, action: #selector(playerCountChanged(_:)), for: .valueChanged)
+        
+        segmentStackView = UIStackView(arrangedSubviews: [gameTypeSegmentedControl, playerCountSegmentedControl])
+        segmentStackView.axis = .vertical
+        segmentStackView.distribution = .fillEqually
+        segmentStackView.spacing = 10
+        segmentStackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(segmentStackView)
+        
+        NSLayoutConstraint.activate([
+            segmentStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            segmentStackView.centerYAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            segmentStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 100),
+            segmentStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -100)
+        ])
+    }
+    
+    @objc func gameTypeChanged(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            selectedGameType = .sevenCard
+        case 1:
+            selectedGameType = .fiveCard
+        default:
+            break
+        }
+        updateGame()
+    }
+    
+    @objc func playerCountChanged(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            selectedPlayerCount = .two
+        case 1:
+            selectedPlayerCount = .three
+        case 2:
+            selectedPlayerCount = .four
+        default:
+            break
+        }
+        updateGame()
+    }
+```
+
+### **Shake 이벤트**
+
+### **motionBegan(_:with:)**
+
+모션이벤트가 시작되었다고 receiver에게 알려준다.
+
+motionBegan은 UIResponder의 인스턴스 메서드이다.
+
+UIViewController는 UIREsponder를 상속받고 있기 때문에 바로 사용이 가능한 것
+
+```swift
+override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            updateGame()
+        }
+    }
+```
+
+## 💻고민과 해결
+
+1. 세그먼트 컨트롤 2개를 담고 있는 스택뷰 하나와
+
+라벨과 카드이미지를 담고있는 스택뷰를 메인스택뷰에 담아서 동적으로 표시하고자 의도했는데, 뭔가 코드가 중구난방으로 지저분하게 되어서 아쉽다.
+
+내 자신도 코드읽기가 불편한데, 다른 사람이 이러한 코드를 읽으면 이해하기 매우 어려울 것 같다고 생각이 들었다.
+
+1. 매번 느끼지만 제약조건을 설정하는 것이 매우 어려움을 느꼈다. 
+
+## 🤔결과
+
+<img width="489" alt="스크린샷 2024-03-15 오전 10 34 06" src="https://github.com/codesquad-members-2024/swift-pokergame/assets/104732020/2597c27d-e728-457a-9db2-952cac13f5a7">
+
+![결과](https://github.com/codesquad-members-2024/swift-pokergame/assets/104732020/43c18b7d-30af-4d21-9ce7-8c39bfaedc04)
+
+## 📚추가학습
+
+### Assets에 이미지 배율에 대해 학습
+
+애플 디바이스는 3가지 종류가 있다.
+
+1. 아이폰 4이전 → 일반 디스플레이
+2. 아이폰 4 ~ 아이폰 5 → 레티나 디스플레이
+3. 아이폰 6 ~ → 레티나 HD디스플레이, Super Retina HD,  Super Retina XDR 디스플레이
+
+디스플레이는 픽셀이 들어간다
+
+애플은 iPhone 4세대를 출시하면서, pt(point)개념을 도입하였다.
+
+pt단위를 사용하면 면적당 픽셀 수 에 상관없이 같은 크기의 화면을 제공할 수 있다.
+
+4이전 아이폰 모델은 1pt = 1px이였기 때문에 pt개념이 필요없지만,
+
+4세대 이후로 1pt = 4px
+
+6세대 이후로 1pt = 9px이 들어가게 되면서
+
+이런 변화를 대응하기 위해 1x 2x 3x 배율 개념이 도입되었다.
+
+기기는 자동으로 자신에게 맞는 배율의 이미지를 사용한다.
+
+개발자는 사용자가 어떤 디바이스를 실행할지 모르기 때문에 모두 준비해야 된다.
+
+</div>
+</details>
