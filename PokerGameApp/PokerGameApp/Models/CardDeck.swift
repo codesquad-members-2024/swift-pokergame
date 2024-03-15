@@ -8,7 +8,7 @@
 import Foundation
 
 struct CardDeck: Equatable {
-    var cards: [PokerCard] = []
+    private var cards: [PokerCard] = []
     
     mutating func reset() {
         cards.removeAll()

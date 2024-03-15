@@ -29,6 +29,7 @@
 		D6F97DE42BA1AC3900745D8D /* PokerDealer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F97DD92BA137E800745D8D /* PokerDealer.swift */; };
 		D6F97DE52BA1AC3B00745D8D /* PokerPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F97DDB2BA137FF00745D8D /* PokerPlayer.swift */; };
 		D6F97DE62BA1AD9B00745D8D /* CardDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F97DD72BA0991100745D8D /* CardDeck.swift */; };
+		D6F97DE82BA2DB4000745D8D /* CardHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F97DE72BA2DB4000745D8D /* CardHolder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		D6F97DD92BA137E800745D8D /* PokerDealer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerDealer.swift; sourceTree = "<group>"; };
 		D6F97DDB2BA137FF00745D8D /* PokerPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerPlayer.swift; sourceTree = "<group>"; };
 		D6F97DE12BA1756800745D8D /* PokerGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerGame.swift; sourceTree = "<group>"; };
+		D6F97DE72BA2DB4000745D8D /* CardHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardHolder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +163,7 @@
 		D6F97DDD2BA1381400745D8D /* GameEntities */ = {
 			isa = PBXGroup;
 			children = (
+				D6F97DE72BA2DB4000745D8D /* CardHolder.swift */,
 				D6F97DD92BA137E800745D8D /* PokerDealer.swift */,
 				D6F97DDB2BA137FF00745D8D /* PokerPlayer.swift */,
 				D6F97DE12BA1756800745D8D /* PokerGame.swift */,
@@ -305,6 +308,7 @@
 				D6F97DD52BA014E600745D8D /* PokerCard.swift in Sources */,
 				D6F97DD82BA0991100745D8D /* CardDeck.swift in Sources */,
 				D6F97DDC2BA137FF00745D8D /* PokerPlayer.swift in Sources */,
+				D6F97DE82BA2DB4000745D8D /* CardHolder.swift in Sources */,
 				D6F97DD32BA0131500745D8D /* Rank.swift in Sources */,
 				D6F97DA32B9E961500745D8D /* SceneDelegate.swift in Sources */,
 				D6F97DE22BA1756800745D8D /* PokerGame.swift in Sources */,

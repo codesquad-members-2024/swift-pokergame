@@ -8,14 +8,23 @@
 import Foundation
 
 
-class PokerDealer {
+class PokerDealer: CardHolder {
     var name: String = "딜러"
-    var dealerCards: [PokerCard] = []
+    var cards: [PokerCard] = []
     var cardDeck = CardDeck()
     
     init() {
         cardDeck.reset()
     }
+    
+    func receive(cards: [PokerCard]) {
+        self.cards.append(contentsOf: cards)
+    }
+    
+    func cardsDescriptions() -> [String] {
+        return cards.map { $0.description }
+    }
+    
 
     func shuffleDeck() {
         _ = cardDeck.shuffle()
