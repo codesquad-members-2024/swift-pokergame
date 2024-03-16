@@ -25,6 +25,10 @@ class PokerCard: Equatable, CustomStringConvertible {
         return lhs.suit == rhs.suit && lhs.rank == rhs.rank
     }
     
+    func getRank() -> Int {
+        return rank.rawValue
+    }
+    
     func compare(other: PokerCard) -> Int {
         if self.rank < other.rank { return -1 }
         else if self.rank == other.rank {
