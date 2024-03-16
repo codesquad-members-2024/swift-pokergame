@@ -8,7 +8,10 @@
 import UIKit
 
 class CardBoardViewController: UIViewController {
+    
     private var segmentStackView: UIStackView!
+    private var winner: String = ""
+    
     var mainStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -44,7 +47,6 @@ class CardBoardViewController: UIViewController {
         }
     }
     
-    
     private func setupMainStackView() {
         view.addSubview(mainStackView)
         setupMainStackViewConstraints()
@@ -53,8 +55,8 @@ class CardBoardViewController: UIViewController {
     private func setupMainStackViewConstraints() {
         NSLayoutConstraint.activate([
             mainStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            mainStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            mainStackView.topAnchor.constraint(equalTo: segmentStackView.bottomAnchor, constant: 20),
+            mainStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -60),
+            mainStackView.topAnchor.constraint(equalTo: segmentStackView.bottomAnchor, constant: 20)
         ])
     }
 }
@@ -90,30 +92,31 @@ private extension CardBoardViewController {
         cardStackView.alignment = .fill
         cardStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        cards.forEach { description in
-            let cardImageView = UIImageView()
-            cardImageView.contentMode = .scaleAspectFit
-            cardImageView.clipsToBounds = true
-            let frontImageName = description
-            
-            if let frontImage = UIImage(named: frontImageName) {
-                cardImageView.image = frontImage
-            } else {
-                cardImageView.image = UIImage(named: "card-back")
+        for (index, card) in cards.enumerated() {
+            DispatchQueue.main.asyncAfter(deadline: .now() + Double(index) * 1.0) {
+                let cardImageView = self.createCardImageView(with: card, cardWidth: cardWidth, cardHeight: cardHeight)
+                cardStackView.addArrangedSubview(cardImageView)
             }
-            cardImageView.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([
-                cardImageView.widthAnchor.constraint(equalToConstant: cardWidth),
-                cardImageView.heightAnchor.constraint(equalToConstant: cardHeight)
-            ])
-            cardStackView.addArrangedSubview(cardImageView)
         }
-        
         
         verticalStackView.addArrangedSubview(nameLabel)
         verticalStackView.addArrangedSubview(cardStackView)
         
         mainStackView.addArrangedSubview(verticalStackView)
+    }
+    
+    func createCardImageView(with cardName: String, cardWidth: CGFloat, cardHeight: CGFloat) -> UIImageView {
+        let cardImageView = UIImageView()
+        cardImageView.contentMode = .scaleAspectFit
+        cardImageView.clipsToBounds = true
+        let frontImageName = cardName
+        cardImageView.image = UIImage(named: frontImageName) ?? UIImage(named: "card-back")
+        cardImageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            cardImageView.widthAnchor.constraint(equalToConstant: cardWidth),
+            cardImageView.heightAnchor.constraint(equalToConstant: cardHeight)
+        ])
+        return cardImageView
     }
     
     func setupSegmentControl() {
@@ -171,21 +174,54 @@ private extension CardBoardViewController {
     private func updateGame() {
         let arrangedSubviews = mainStackView.arrangedSubviews
         for subview in arrangedSubviews {
-            mainStackView.removeArrangedSubview(subview)
             subview.removeFromSuperview()
         }
+        view.subviews.filter { $0.tag == 999 }.forEach { $0.removeFromSuperview() }
         
         let game = PokerGame(gameType: selectedGameType, playerCount: selectedPlayerCount)
         
         game.startGame()
+        winner = game.winner
         
         let (names, cardsArray) = game.getPlayersInfo()
 
         for (name, cards) in zip(names, cardsArray) {
             setupCardsAndNameStack(with: name, and: cards)
         }
-        
         let (dealerName, dealerCards) = game.getDealerInfo()
         setupCardsAndNameStack(with: dealerName, and: dealerCards)
+        
+        for subView in mainStackView.arrangedSubviews {
+            if let playerStackView = subView as? UIStackView,
+               let nameLabel = playerStackView.arrangedSubviews.first as? UILabel,
+               nameLabel.text == winner {
+                let medalImage = emojiToImage(emoji: "🥇", size: CGSize(width: 50, height: 50))
+                let medalImageView = UIImageView(image: medalImage)
+                medalImageView.tag = 999
+                medalImageView.translatesAutoresizingMaskIntoConstraints = false
+              
+                view.addSubview(medalImageView)
+                
+                
+                NSLayoutConstraint.activate([
+                    medalImageView.leadingAnchor.constraint(equalTo: playerStackView.trailingAnchor, constant: 10),
+                    medalImageView.centerYAnchor.constraint(equalTo: playerStackView.centerYAnchor, constant: 10)
+                ])
+            }
+        }
+    }
+    
+    func emojiToImage(emoji: String, size: CGSize) -> UIImage? {
+        let label = UILabel()
+        label.text = emoji
+        label.textAlignment = .center
+        label.bounds = CGRect(origin: .zero, size: size)
+        label.font = UIFont.systemFont(ofSize: size.height)
+        
+        UIGraphicsBeginImageContextWithOptions(label.bounds.size, false, 0)
+        defer { UIGraphicsEndImageContext() }
+        guard let context = UIGraphicsGetCurrentContext() else { return nil }
+        label.layer.render(in: context)
+        return UIGraphicsGetImageFromCurrentImageContext()
     }
 }

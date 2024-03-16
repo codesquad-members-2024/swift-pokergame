@@ -11,6 +11,8 @@ import Foundation
 class PokerDealer: CardHolder {
     var name: String = "딜러"
     var cards: [PokerCard] = []
+    private var handRank: HandRank = .highCard
+    private var highCard: Int = 0
     var cardDeck = CardDeck()
     
     init() {

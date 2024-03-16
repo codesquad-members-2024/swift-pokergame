@@ -7,6 +7,10 @@
 
 import Foundation
 
+enum HandRank: Int {
+    case highCard = 0, onePair, twoPairs, threeOfAKind, straight, fourOfAKind
+}
+
 enum GameType: Int {
     case sevenCard = 7
     case fiveCard = 5
@@ -22,6 +26,8 @@ class PokerGame {
     private var dealer = PokerDealer()
     private var players: [PokerPlayer] = []
     private var gameType: GameType
+    private var allInfos: [(String, [String])] = []
+    var winner: String = ""
     
     init(gameType: GameType, playerCount: PlayerType) {
         self.gameType = gameType
@@ -54,14 +60,20 @@ class PokerGame {
         distributeCards(to: dealer, cardCount: cardCount)
         for player in players {
             distributeCards(to: player, cardCount: cardCount)
+            player.evaluateHand()
         }
+        
+        winner = determineWinner(players: players)!.name
+        print(winner)
     }
     
     func getDealerInfo() -> (String, [String]) {
+        allInfos.append( (dealer.name, dealer.cardsDescriptions()))
         return (dealer.name, dealer.cardsDescriptions())
     }
     
     func getPlayersInfo() -> ([String], [[String]]) {
+        allInfos.append( (dealer.name, dealer.cardsDescriptions()))
         return (players.map { $0.name }, players.map { $0.cardsDescriptions() })
     }
     
@@ -74,5 +86,16 @@ class PokerGame {
         let names = players.map { $0.name }
         let uniqueNames = Set(names)
         return uniqueNames.count
+    }
+    
+    private func determineWinner(players: [PokerPlayer]) -> PokerPlayer? {
+        let sortedPlayers = players.sorted {
+            if $0.handRank.rawValue == $1.handRank.rawValue {
+                return $0.highCard > $1.highCard
+            }
+            return $0.handRank.rawValue > $1.handRank.rawValue
+        }
+        
+        return sortedPlayers.first
     }
 }
